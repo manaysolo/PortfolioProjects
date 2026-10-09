@@ -1,45 +1,43 @@
-# PortfolioProjects
-COVID-19 global data exploration and analysis using SQL Server (T-SQL): infection and mortality rates, tracking rollouts via Window Functions, CTEs, and Views.
-# COVID-19 Data Exploration (SQL Server / T-SQL)
+# COVID-19 Global Data Exploration (SQL Server / T-SQL)
 
 An exploratory data analysis (EDA) project analyzing global COVID-19 trends using Microsoft SQL Server (T-SQL).
 
-This repository is the first phase of a full data analysis cycle. The objective is to query a large public dataset, address data type inconsistencies, derive key public health indicators, and build reusable views.
+This repository focuses on extracting meaningful public health insights from large-scale data, addressing data type inconsistencies, tracking vaccination rollouts, and preparing data structures for Business Intelligence tools.
 
 ---
 
 ## 🧭 Project Roadmap
 
-- [x] **Phase 1:** Data Exploration & Aggregation with SQL Server (this repository)
-- [ ] **Phase 2:** Advanced Data Cleaning (SQL)
-- [ ] **Phase 3:** Correlation Analysis & Statistical Modeling (Python / Pandas / Seaborn)
+- [x] **Phase 1: Exploratory Data Analysis & Aggregation (T-SQL)**
+- [ ] **Phase 2: Interactive BI Dashboard (Power BI / Tableau)**
+- [ ] **Phase 3: Correlation & Statistical Modeling (Python / Pandas / Seaborn)**
 
 ---
 
 ## 🛠️ SQL Skills & Concepts Applied
 
-- **Joins:** Multi-conditional `INNER JOIN` (`location` and `date`).
-- **Data Filtering & Integrity:** `WHERE` clauses, pattern matching with `LIKE`, filtering out aggregates with `IS NOT NULL`, and handling potential division-by-zero errors via `NULLIF`.
-- **Aggregations & Grouping:** `GROUP BY`, `SUM`, `MAX`.
-- **Data Type Casting:** `CAST` and `CONVERT` (converting text strings to integers to prevent alphabetical sorting bugs).
-- **Window Functions:** Calculating rolling totals with `SUM(...) OVER (PARTITION BY ... ORDER BY ...)`.
-- **Modularity & Reusability:** 
-  - Common Table Expressions (CTEs) via `WITH` to work on calculated fields.
-  - Temporary Tables (`#Table`) for intermediate computations.
-  - Persistent Views (`CREATE VIEW`) for saving clean analytical queries.
+* **Joins:** Multi-conditional `INNER JOIN` (`location` and `date`) combining death statistics and vaccination records.
+* **Data Filtering & Integrity:** `WHERE` clauses, pattern matching with `LIKE`, filtering out pre-aggregated continent rows with `IS NOT NULL`, and division-by-zero protection using `NULLIF`.
+* **Data Type Handling:** Explicit conversions using `CAST` to handle string-stored numeric data.
+* **Aggregations & Calculations:** Multi-level summaries using `GROUP BY`, `ORDER BY`, `MAX()`, and `SUM()`.
+* **Window Functions:** Running cumulative sums (`OVER (PARTITION BY ... ORDER BY ...)`) to track daily vaccine rollout.
+* **Advanced Query Structuring:** 
+  * Common Table Expressions (`WITH ... AS`) to compute dynamic population ratios.
+  * Temporary Tables (`#TempTable`) for intermediate analytical steps.
+  * Views (`CREATE VIEW`) to expose curated data layers ready for BI ingestion.
 
 ---
 
-## 📌 Key Metrics & Questions Answered
+## 📊 Key Insights Explored
 
-1. **Daily & Total Case Fatality Rate:** Percentage of confirmed cases leading to death (`total_deaths / total_cases * 100`).
-2. **Infection Rate Relative to Population:** Proportion of the population infected per country (`total_cases / population * 100`).
-3. **Absolute vs. Relative Mortality:** Identifying countries with the highest absolute death counts versus those with the highest death toll relative to population.
-4. **Continental vs. National Granularity:** Handling pre-aggregated regional figures (`continent IS NULL`) versus granular country-level entries.
-5. **Vaccination Tracking:** Computing rolling vaccinated totals over time and evaluating country-level vaccination progress against total population.
+1. **Likelihood of dying if infected:** Tracking the Case Fatality Rate over time per country.
+2. **Infection rates:** Percentage of the population infected by country.
+3. **Global impact:** Ranking countries and continents by highest total death counts.
+4. **Vaccination rollout:** Tracking the progressive percentage of vaccinated population per country.
 
 ---
 
-## 📁 Data Source
+## 📂 Repository Structure
 
-Public COVID-19 data provided by **Our World in Data** (tables: `CovidDeaths` and `CovidVaccinations`).
+* `DataExplorationProjectCovid.sql`: Full documented SQL script with all queries and operations.
+* `README.md`: Overview and documentation of the exploration phase.
